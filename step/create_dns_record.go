@@ -53,7 +53,8 @@ func (s *CreateDNSRecord) Do(ctx context.Context) ([]cucumber.Procedure, error) 
 
 	_, err = s.Route53Svc.ChangeResourceRecordSets(params)
 	if err != nil {
-		return steps, err
+		s.logger.Warn("DNS Record creation failed", zap.Error(err))
+		return steps, nil
 	}
 
 	// Hack to allow DNS propagation

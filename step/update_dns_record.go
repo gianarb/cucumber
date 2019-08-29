@@ -52,7 +52,8 @@ func (s *UpdateDNSRecord) Do(ctx context.Context) ([]cucumber.Procedure, error) 
 
 	_, err = s.Route53Svc.ChangeResourceRecordSets(params)
 	if err != nil {
-		return nil, err
+		s.logger.Warn("DNS Record update failed", zap.Error(err))
+		return nil, nil
 	}
 
 	// Hack to allow DNS propagation

@@ -114,7 +114,12 @@ func (p *CreatePlan) Create(ctx context.Context) ([]cucumber.Procedure, error) {
 		targetIPs = append(targetIPs, instance.PublicIpAddress)
 	}
 
+	// TODO: I would like to replace the LookupIP with an AWS request becuase
+	// DNS propagation makes everything flaky
 	if ips, err := net.LookupIP(p.DNSRecord); err != nil && len(targetIPs) > 0 {
+		if err != nil {
+			p.logger.Warn("DNS lookup failed", zap.String("dns", p.DNSRecord), zap.Error(err))
+		}
 		steps = append(steps, &step.CreateDNSRecord{
 			Route53Svc:   route52Svc,
 			DNSRecord:    p.DNSRecord,
