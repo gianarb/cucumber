@@ -32,8 +32,15 @@ reconciliation loop.
 
 ## Test reconciliation loop
 
-You can try to remove an AWS resource, it will recreate it during one of the
-reconciliation process.
+You can try to remove an AWS resource such as:
+
+* A target from the DNS record
+* The DNS record
+* One or more EC2
+* You can scale up the number of nodes in the request file and restart cucumber
+  (scale down not supported yet)
+
+it will recreate what you removed during one of the reconciliation process.
 
 ## Requirements
 This is a PoC to describe how reactive planning works and why it is cool. So
