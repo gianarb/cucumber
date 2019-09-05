@@ -8,6 +8,7 @@ import (
 
 	"github.com/gianarb/cucumber"
 	"github.com/gianarb/cucumber/plan"
+	"github.com/gianarb/planner"
 	"go.uber.org/zap"
 )
 
@@ -52,9 +53,8 @@ func main() {
 			"cluster-name": req.Name,
 		},
 	}
-	p.WithLogger(logger)
 
-	scheduler := cucumber.Scheduler{}
+	scheduler := planner.NewScheduler()
 	scheduler.WithLogger(logger)
 
 	if err := scheduler.Execute(ctx, &p); err != nil {

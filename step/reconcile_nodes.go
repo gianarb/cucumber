@@ -6,7 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"go.uber.org/zap"
 
-	"github.com/gianarb/cucumber"
+	"github.com/gianarb/planner"
 )
 
 type ReconcileNodes struct {
@@ -23,9 +23,9 @@ func (s *ReconcileNodes) Name() string {
 	return "reconcile-node"
 }
 
-func (s *ReconcileNodes) Do(ctx context.Context) ([]cucumber.Procedure, error) {
+func (s *ReconcileNodes) Do(ctx context.Context) ([]planner.Procedure, error) {
 	s.logger.Info("need to reconcile number of running nodes", zap.Int("current", s.CurrentNumber), zap.Int("desired", s.DesiredNumber))
-	steps := []cucumber.Procedure{}
+	steps := []planner.Procedure{}
 	if s.CurrentNumber > s.DesiredNumber {
 		for ii := s.DesiredNumber; ii < s.CurrentNumber; ii++ {
 			// TODO: remove instances if they are too many

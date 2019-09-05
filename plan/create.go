@@ -9,8 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/route53"
-	"github.com/gianarb/cucumber"
 	"github.com/gianarb/cucumber/step"
+	"github.com/gianarb/planner"
 	"go.uber.org/zap"
 )
 
@@ -27,9 +27,9 @@ func (p *CreatePlan) Name() string {
 	return "create"
 }
 
-func (p *CreatePlan) Create(ctx context.Context) ([]cucumber.Procedure, error) {
+func (p *CreatePlan) Create(ctx context.Context) ([]planner.Procedure, error) {
 	var err error
-	steps := []cucumber.Procedure{}
+	steps := []planner.Procedure{}
 
 	sess := session.Must(session.NewSession())
 	ec2Svc := ec2.New(sess, &aws.Config{Region: aws.String("us-east-1")})

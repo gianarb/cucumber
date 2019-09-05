@@ -49,3 +49,9 @@ there are some things that you need to provide and some limitations:
 1. It only works on `us-east-1`
 2. You need to provide a public vpc in us-east-1 tagged with `app=cucumber`
 3. The nodes will be located inside a random subnets from the selected vpc
+
+## Dependency
+
+[gianarb/planner](https://github.com/gianarb/planner) is the library that I
+wrote as foundation to write reactive planning. It contains the interface, one
+scheduler and more will come...

@@ -6,7 +6,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/route53"
-	"github.com/gianarb/cucumber"
+	"github.com/gianarb/planner"
 	"go.uber.org/zap"
 )
 
@@ -22,9 +22,9 @@ func (s *CreateDNSRecord) Name() string {
 	return "create_dns_record"
 }
 
-func (s *CreateDNSRecord) Do(ctx context.Context) ([]cucumber.Procedure, error) {
+func (s *CreateDNSRecord) Do(ctx context.Context) ([]planner.Procedure, error) {
 	var err error
-	steps := []cucumber.Procedure{}
+	steps := []planner.Procedure{}
 
 	rr := []*route53.ResourceRecord{}
 	for _, ip := range s.TargetIPs {

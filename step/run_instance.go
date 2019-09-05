@@ -5,7 +5,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ec2"
-	"github.com/gianarb/cucumber"
+	"github.com/gianarb/planner"
 	"go.uber.org/zap"
 )
 
@@ -21,7 +21,7 @@ func (s *RunInstance) Name() string {
 	return "run-instance"
 }
 
-func (s *RunInstance) Do(ctx context.Context) ([]cucumber.Procedure, error) {
+func (s *RunInstance) Do(ctx context.Context) ([]planner.Procedure, error) {
 	tags := []*ec2.Tag{}
 	for k, v := range s.Tags {
 		if k == "cluster-name" {
@@ -35,7 +35,7 @@ func (s *RunInstance) Do(ctx context.Context) ([]cucumber.Procedure, error) {
 			Value: aws.String(v),
 		})
 	}
-	steps := []cucumber.Procedure{}
+	steps := []planner.Procedure{}
 	instanceInput := &ec2.RunInstancesInput{
 		ImageId:      aws.String("ami-0378588b4ae11ec24"),
 		InstanceType: aws.String("t2.micro"),
